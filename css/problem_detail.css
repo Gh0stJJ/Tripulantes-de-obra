@@ -1,0 +1,95 @@
+/* General Styles */
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f7f7f5; /* Fondo claro */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #0571d3;
+}
+
+.problem-detail-container {
+    flex: 1;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Título principal */
+.title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.divider {
+    border: none;
+    height: 2px;
+    background-color: #0571d3;
+    margin: 10px 0;
+}
+
+/* Secciones */
+.section {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.section-title.highlight {
+    color: #005bb5;
+    font-size: 20px;
+    text-transform: uppercase;
+    padding-bottom: 20px;
+}
+
+.section-content {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Profesionales */
+.professionals {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.professional {
+    display: flex;
+    flex-direction: column;
+}
+
+.professional-title {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.professional-title.highlight {
+    background-color: #0571d3;
+    color: #fff;
+    padding: 10px 10px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+/* Footer */
+.footer {
+    background-color: #0571d3;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.footer .logo {
+    width: 100%;
+    max-width: 200px;
+}
