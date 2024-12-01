@@ -37,6 +37,8 @@ body {
     flex-direction: column;
     gap: 15px;
     width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Botones de problemas */
