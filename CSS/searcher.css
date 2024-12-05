@@ -1,0 +1,130 @@
+/* General Styles */
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f7f7f5; /* Fondo claro */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    color: #0571d3;
+}
+
+/* Contenedor principal */
+.architects-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Título */
+.title {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+}
+
+/* Barra de búsqueda */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-input::placeholder {
+    color: #999;
+}
+
+.search-btn {
+    background-color: #0571d3;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: #005bb5;
+    transform: scale(1.05);
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Lista de arquitectos */
+.architect-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.architect-card {
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.architect-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: #0571d3;
+}
+
+.architect-description {
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    line-height: 1.5;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #0571d3;
+    margin: 20px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    .title {
+        font-size: 24px;
+    }
+
+    .search-input {
+        font-size: 14px;
+    }
+
+    .architect-name {
+        font-size: 16px;
+    }
+
+    .architect-description {
+        font-size: 12px;
+    }
+}
