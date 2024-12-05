@@ -102,6 +102,47 @@ input[type="date"]:valid::before {
     max-width: 250px;
 }
 
+/* Estilizar el select para que coincida con los inputs */
+.register-form select {
+    border: none;
+    border-radius: 25px;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #0571d3;
+    appearance: none; /* Oculta el ícono predeterminado del select */
+    cursor: pointer;
+    position: relative;
+}
+
+.register-form select:focus {
+    outline: none;
+    border: 2px solid #005bb5;
+}
+
+/* Ajuste de placeholder para la primera opción */
+.register-form select option:first-child {
+    color: #999;
+}
+
+/* Icono de flecha personalizada */
+.register-form select::-ms-expand {
+    display: none; /* Oculta el ícono en IE/Edge */
+}
+
+/* Agregar flecha personalizada */
+.register-form select {
+    background-image: url('../images/down-arrow.png'); /* Agrega una imagen de flecha personalizada */
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+}
+
+
 /* Responsive Design */
 @media (max-width: 576px) {
     .title {
