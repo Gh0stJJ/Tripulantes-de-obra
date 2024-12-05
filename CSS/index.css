@@ -1,93 +1,101 @@
-/* Estilos básicos */
+/* General Styles */
 body {
-  font-family: "Poppins", sans-serif;
-  background-color: #0571d3;
-  padding-top: 20px;
+    font-family: "Poppins", sans-serif;
+    background-color: #0571d3; /* Fondo azul */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #fff;
+    text-align: center;
 }
 
-h2 {
-  font-size: 22px;
-  font-weight: bold;
-  color: #fff;
+/* Contenedor principal */
+.welcome-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-p {
-  font-size: 16px;
+/* Títulos */
+.welcome-title {
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0;
 }
 
-img.img-fluid {
-  width: 40%; /* Reduce el tamaño de la imagen inicial */
-  height: auto;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding-bottom: 40px;
-  padding-top: 20px;
+.app-title {
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
 }
 
-.btn {
-  font-size: 18px; /* Ajusta el tamaño de la fuente */
-  font-weight: bold;
-  border-radius: 50px; /* Hace los botones más redondeados */
-  padding: 10px 20px; /* Añade relleno interno */
-  background-color: rgb(255, 255, 255);
-  color: #0571d3;
-  width: 80%; 
-  min-width: 120px; /* Asegura un ancho mínimo */
-  max-width: 300px; /* Limita el ancho máximo */
-  margin: 0 auto; /* Centra los botones */
-  display: block;
-  text-align: center; /* Centra el texto del botón */
-  transition: all 0.3s ease; /* Efecto de transición */
-}
-
-.btn:hover {
-  background-color: #005bb5; /* Cambia el fondo al pasar el cursor */
-  color: #fff; /* Cambia el color del texto */
-  transform: scale(1.05); /* Hace un pequeño zoom en el botón */
-}
-
-.text {
-  color: #fff;
-  font-size: medium;
-}
-
-.btn-rounded {
-  border-radius: 50px; /* Asegura que los botones tengan bordes más redondeados */
-}
-
-
-
-.logo {
-  width: 60%; /* Ajusta el tamaño del logo */
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Personalización para pantallas pequeñas */
-@media (max-width: 576px) {
-  h2 {
-    font-size: 18px;
-  }
-
-  p {
+/* Descripciones */
+.description {
     font-size: 14px;
-  }
+    font-weight: 400;
+    line-height: 1.6;
+    text-align: justify;
+}
 
-  .btn {
+/* Botones de perfil */
+.profile-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+button.profile-btn {
+    justify-content: center;
+}
+
+.profile-btn {
+    background-color: #fff;
+    color: #0571d3;
+    border: none;
+    border-radius: 25px;
+    padding: 15px 20px;
     font-size: 16px;
-    min-width: 120px; /* Reduce el ancho mínimo para pantallas pequeñas */
-    padding: 8px 16px;
-  }
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+}
 
-  .img-fluid {
-    width: 60%; /* Incrementa el tamaño de la imagen en pantallas pequeñas */
-  }
+.profile-btn:hover {
+    background-color: #005bb5;
+    color: #fff;
+    transform: scale(1.05);
+}
 
-  .logo {
-    width: 70%; /* Ajusta el logo para pantallas pequeñas */
-  }
+/* Iconos */
+.icon {
+    width: 30px;
+    height: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    .app-title {
+        font-size: 24px;
+    }
+
+    .profile-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
 }

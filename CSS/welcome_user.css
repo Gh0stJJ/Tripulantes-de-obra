@@ -1,0 +1,93 @@
+/* Estilos básicos */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #0571d3;
+  padding-top: 20px;
+}
+
+h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
+
+p {
+  font-size: 16px;
+}
+
+img.img-fluid {
+  width: 40%; /* Reduce el tamaño de la imagen inicial */
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 40px;
+  padding-top: 20px;
+}
+
+.btn {
+  font-size: 18px; /* Ajusta el tamaño de la fuente */
+  font-weight: bold;
+  border-radius: 50px; /* Hace los botones más redondeados */
+  padding: 10px 20px; /* Añade relleno interno */
+  background-color: rgb(255, 255, 255);
+  color: #0571d3;
+  width: 80%; 
+  min-width: 120px; /* Asegura un ancho mínimo */
+  max-width: 300px; /* Limita el ancho máximo */
+  margin: 0 auto; /* Centra los botones */
+  display: block;
+  text-align: center; /* Centra el texto del botón */
+  transition: all 0.3s ease; /* Efecto de transición */
+}
+
+.btn:hover {
+  background-color: #005bb5; /* Cambia el fondo al pasar el cursor */
+  color: #fff; /* Cambia el color del texto */
+  transform: scale(1.05); /* Hace un pequeño zoom en el botón */
+}
+
+.text {
+  color: #fff;
+  font-size: medium;
+}
+
+.btn-rounded {
+  border-radius: 50px; /* Asegura que los botones tengan bordes más redondeados */
+}
+
+
+
+.logo {
+  width: 60%; /* Ajusta el tamaño del logo */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Personalización para pantallas pequeñas */
+@media (max-width: 576px) {
+  h2 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .btn {
+    font-size: 16px;
+    min-width: 120px; /* Reduce el ancho mínimo para pantallas pequeñas */
+    padding: 8px 16px;
+  }
+
+  .img-fluid {
+    width: 60%; /* Incrementa el tamaño de la imagen en pantallas pequeñas */
+  }
+
+  .logo {
+    width: 70%; /* Ajusta el logo para pantallas pequeñas */
+  }
+}
