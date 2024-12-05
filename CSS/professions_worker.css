@@ -1,0 +1,74 @@
+/* General Styles */
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f7f7f5; /* Fondo claro */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    color: #0571d3;
+    text-align: center;
+}
+
+/* Contenedor principal */
+.professions-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Título */
+.title {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Botones de profesiones */
+.profession-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.profession-btn {
+    background-color: #0571d3;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+    text-align: center;
+}
+
+.profession-btn:hover {
+    background-color: #005bb5;
+    transform: scale(1.05);
+}
+
+.wide-btn {
+    width: 100%;
+    max-width: none;
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    .profession-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .wide-btn {
+        font-size: 14px;
+    }
+}
