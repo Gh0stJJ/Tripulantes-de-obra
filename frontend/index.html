@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido - Tripulantes de Obra</title>
-    <link rel="stylesheet" href="CSS/reset.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/reset.css') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="CSS/index.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/index.css') }}">
 </head>
 <body>
     <div class="welcome-container">
@@ -32,13 +32,13 @@
         <!-- Botones -->
         <div class="profile-buttons">
             <button class="profile-btn" id="btnUsuario" >
-            <img src="images/profile-user.png" alt="Usuario" class="icon"> PERFIL DE USUARIO
+            <img src="{{ url_for('static', filename='images/profile-user.png') }}" alt="Usuario" class="icon"> PERFIL DE USUARIO
             </button>
             <button class="profile-btn" id="btnEmpresa" >
-            <img src="images/security-helmet.png" alt="Trabajo" class="icon"> PERFIL DE TRABAJO
+            <img src="{{ url_for('static', filename='images/security-helmet.png') }}" alt="Trabajo" class="icon"> PERFIL DE TRABAJO
             </button>
         </div>
     </div>
-    <script src="JS/index.js"></script>
+    <script src="{{ url_for('static', filename='JS/index.js') }}"></script>
 </body>
 </html>

@@ -15,10 +15,10 @@ function domReady(){
     btnUsuario = document.getElementById('btnUsuario');
     btnEmpresa = document.getElementById('btnEmpresa');
     btnUsuario.addEventListener('click', function(){
-        window.location.href = 'welcome.html';
+        window.location.href = 'welcome';
     });
     btnEmpresa.addEventListener('click', function(){
-        window.location.href = 'welcome_worker.html';
+        window.location.href = 'welcome_worker';
     });
 }
 
