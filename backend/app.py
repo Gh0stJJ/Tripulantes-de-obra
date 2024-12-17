@@ -113,6 +113,24 @@ def show_professionals(profession):
         return "Profesión no encontrada", 404
     return render_template("searcher.html", profession=profession.title(), professionals=professionals)
 
+# Sección de rutas para el trabajador
+
+@app.route('/welcome_worker')
+def welcome_worker():
+    return render_template('welcome_worker.html')
+
+@app.route('/login_worker')
+def login_worker():
+    return render_template('login_worker.html')
+
+@app.route('/register_worker')
+def register_worker():
+    return render_template('register_worker.html')
+
+@app.route('/professions_worker')
+def professions_worker():
+    return render_template('professions_worker.html')
+
 if __name__ == '__main__':
     #csrf.init_app(app)
     #app.run(debug=True,host='0.0.0.0', port=5000)
