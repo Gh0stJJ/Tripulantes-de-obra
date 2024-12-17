@@ -3,6 +3,7 @@ from flask_login import LoginManager
 from dotenv import load_dotenv
 from werkzeug.security import generate_password_hash , check_password_hash
 from flask_socketio import SocketIO
+from problems_data import PROBLEMS_DATA
 import os
 
 from extensions import db
@@ -68,7 +69,15 @@ def register():
 
 @app.route('/problems', methods=['GET'])
 def problems():
-    return render_template('problems.html')
+    return render_template('problems.html', problems=PROBLEMS_DATA)
+
+
+@app.route("/problems/<problem_id>")
+def problem_detail(problem_id):
+    problem = PROBLEMS_DATA.get(problem_id)
+    if not problem:
+        return "Problema no encontrado", 404
+    return render_template("problem_detail.html", problem=problem)
 
 # Ruta para el inicio de sesión
 @app.route('/login', methods=['POST'])

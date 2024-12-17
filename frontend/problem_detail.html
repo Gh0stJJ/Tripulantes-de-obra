@@ -3,72 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Humedad y Moho</title>
-    <link rel="stylesheet" href="CSS/reset.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="CSS/problem_detail.css">
+    <title>{{ problem.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/problem_detail.css') }}">
 </head>
 <body>
     <div class="problem-detail-container">
-        <!-- Título -->
-        <h1 class="title">Humedad y moho</h1>
+        <h1 class="title">{{ problem.title }}</h1>
         <hr class="divider">
 
         <!-- Descripción -->
         <div class="section">
             <p class="section-title">Descripción:</p>
-            <p class="section-content">
-                Manchas negras o verdosas en las paredes, techos o esquinas, que generan mal olor y pueden ser perjudiciales para la salud.
-            </p>
+            <p class="section-content">{{ problem.description }}</p>
         </div>
 
         <!-- Causa común -->
         <div class="section">
             <p class="section-title">Causa común:</p>
-            <p class="section-content">
-                Falta de ventilación, fugas de agua o alta humedad en el ambiente.
-            </p>
+            <p class="section-content">{{ problem.cause }}</p>
         </div>
 
         <!-- Profesionales recomendados -->
         <div class="section">
             <p class="section-title highlight">PROFESIONALES RECOMENDADOS:</p>
             <div class="professionals">
-                <div class="professional">
-                    <div class="professional-title highlight">Ing. Sanitario:</div>
-                    <p>Para identificar y solucionar fugas ocultas en el sistema de agua que puedan estar causando la humedad.</p>
-                </div>
-                <div class="professional">
-                    <div class="professional-title highlight">Plomero:</div>
-                    <p>Para reparaciones rápidas en conexiones de agua o fugas menores.</p>
-                </div>
-                <div class="professional">
-                    <div class="professional-title highlight">Albañil:</div>
-                    <p>Para reparar y restaurar las paredes después de eliminar las fuentes de humedad.</p>
-                </div>
-                <div class="professional">
-                    <div class="professional-title highlight">Yesero:</div>
-                    <p>Para nivelar y dar acabado a las paredes afectadas, eliminando las manchas de moho.</p>
-                </div>
-                <div class="professional">
-                    <div class="professional-title highlight">Arquitecto:</div>
-                    <p>Para evaluar y rediseñar los espacios en caso de problemas estructurales que causen acumulación de humedad.</p>
-                </div>
-                <div class="professional">
-                    <div class="professional-title highlight">Especialista en Impermeabilización:</div>
-                    <p>Para aplicar soluciones preventivas que eviten la entrada de humedad en paredes y techos.</p>
-                </div>
+                {% for professional in problem.professionals %}
+                    <div class="professional">
+                        <button class="professional-title highlight">{{ professional.title }}:</button>
+                        <p>{{ professional.description }}</p>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
 
     <!-- Footer -->
     <footer class="footer">
-        <img src="images/USUARIO (500 x 500 px).svg" alt="Logo Tripulantes de Obra" class="logo">
+        <img src="{{ url_for('static', filename='images/USUARIO (500 x 500 px).svg') }}" alt="Logo" class="logo">
     </footer>
 </body>
 </html>
