@@ -1,14 +1,10 @@
-from datetime import datetime, timezone
+from extensions import db
 from flask_login import UserMixin
-from sqlalchemy import (
-    Column, Integer, String, Date, DateTime, Text,
-    ForeignKey, Enum, Table
-)
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, Date, DateTime, ForeignKey, Enum, Table , Text
 from sqlalchemy.orm import relationship
+from datetime import datetime, timezone
 
-
-Base = declarative_base()
+SCHEMA = 'tripulantes' 
 
 # Definición del tipo Enum para el rol del usuario
 user_role_enum = Enum('client', 'professional', name='user_role')
@@ -16,14 +12,16 @@ user_role_enum = Enum('client', 'professional', name='user_role')
 # Tabla intermedia para la relación many-to-many entre Professions y Problems
 profession_problems = Table(
     'profession_problems',
-    Base.metadata,
-    Column('profession_id', Integer, ForeignKey('professions.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True),
-    Column('problem_id', Integer, ForeignKey('problems.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
+    db.metadata,
+    db.Column('profession_id', db.Integer, db.ForeignKey(f'{SCHEMA}.professions.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True),
+    db.Column('problem_id', db.Integer, db.ForeignKey(f'{SCHEMA}.problems.id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True),
+    schema=SCHEMA
 )
 
 
-class User(Base, UserMixin):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
+    __table_args__ = {'schema': SCHEMA} 
 
     id = Column(Integer, primary_key=True)
     full_name = Column(String(150), nullable=False)
@@ -41,8 +39,9 @@ class User(Base, UserMixin):
     professional_profile = relationship("ProfessionalProfile", uselist=False, back_populates="user")
 
 
-class Profession(Base):
+class Profession(db.Model):
     __tablename__ = 'professions'
+    __table_args__ = {'schema': SCHEMA} 
 
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False, unique=True)
@@ -55,8 +54,9 @@ class Profession(Base):
     problems = relationship("Problem", secondary=profession_problems, back_populates="professions")
 
 
-class Problem(Base):
+class Problem(db.Model):
     __tablename__ = 'problems'
+    __table_args__ = {'schema': SCHEMA} 
 
     id = Column(Integer, primary_key=True)
     description = Column(String(255), nullable=False)
@@ -65,18 +65,19 @@ class Problem(Base):
     professions = relationship("Profession", secondary=profession_problems, back_populates="problems")
 
 
-class ProfessionalProfile(Base):
+class ProfessionalProfile(db.Model):
     __tablename__ = 'professional_profiles'
+    __table_args__ = {'schema': SCHEMA}  # Esquema especificado
 
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('users.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
-    profession_id = Column(Integer, ForeignKey('professions.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
-    location = Column(String(255))
-    facebook_link = Column(String(255))
-    instagram_link = Column(String(255))
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
+    profession_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.professions.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
+    location = db.Column(db.String(255))
+    facebook_link = db.Column(db.String(255))
+    instagram_link = db.Column(db.String(255))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     # Relaciones
-    user = relationship("User", back_populates="professional_profile")
-    profession = relationship("Profession", back_populates="professionals")
+    user = db.relationship("User", back_populates="professional_profile")
+    profession = db.relationship("Profession", back_populates="professionals")

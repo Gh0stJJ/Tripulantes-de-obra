@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Tripulantes de Obra</title>
-    <link rel="stylesheet" href="CSS/reset.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/reset.css') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="CSS/register.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/register.css') }}">
 </head>
 <body>
     <div class="register-container">
@@ -18,26 +18,26 @@
         <h1 class="title">REGÍSTRATE</h1>
 
         <!-- Formulario -->
-        <form class="register-form">
-            <input type="text" placeholder="Nombre completo" required>
-            <input type="date" placeholder="Fecha de nacimiento" required>
-            <input type="text" placeholder="Cédula" required>
-            <input type="tel" placeholder="Teléfono" required>
-            <input type="email" placeholder="Correo" required>
-            <input type="text" placeholder="Nombre de usuario" required>
-            <input type="password" placeholder="Contraseña" required>
-            <input type="password" placeholder="Repetir contraseña" required>
-
+        <form class="register-form" id="register-form">
+            <input type="text" id="full_name" placeholder="Nombre completo" required>
+            <input type="date" id="birth_date" placeholder="Fecha de nacimiento" required>
+            <input type="text" id="national_id" placeholder="Cédula" required>
+            <input type="tel" id="phone" placeholder="Teléfono" required>
+            <input type="email" id="email" placeholder="Correo" required>
+            <input type="text" id="username" placeholder="Nombre de usuario" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <input type="password" id="repeat_password" placeholder="Repetir contraseña" required>
             <button type="submit" class="btn-primary">Registrarse</button>
         </form>
-
+        
         <!-- Texto adicional -->
-        <p class="account-text">¿Ya tienes una cuenta? <a href="login.html" class="login-link">Inicia sesión</a></p>
+        <p class="account-text">¿Ya tienes una cuenta? <a href="{{ url_for('login') }}" class="login-link">Inicia sesión</a></p>
 
         <!-- Logo -->
         <div class="logo-container">
-            <img src="images/USUARIO (500 x 500 px).svg" alt="Logo Tripulantes de Obra" class="logo">
+            <img src="{{ url_for('static', filename='images/USUARIO (500 x 500 px).svg') }}" alt="Logo Tripulantes de Obra" class="logo">
         </div>
     </div>
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
 </body>
 </html>

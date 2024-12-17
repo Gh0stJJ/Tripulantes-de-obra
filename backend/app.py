@@ -1,11 +1,13 @@
-from flask import Flask, render_template
-from flask_login import LoginManager, UserMixin
-from flask_sqlalchemy import SQLAlchemy
-import os
+from flask import Flask, render_template, request, jsonify
+from flask_login import LoginManager
 from dotenv import load_dotenv
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash
 from flask_socketio import SocketIO
+import os
+
+from extensions import db
 from models import User
+from database import create_user
 
 #Templates folder
 template_dir = os.path.abspath('../frontend')
@@ -17,7 +19,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['UPLOAD_FOLDER'] = '../Frontend/static/uploads'
 # app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 #csrf = CSRFProtect()
-db = SQLAlchemy(app)
+db.init_app(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 socketIO = SocketIO(app)
@@ -40,6 +42,26 @@ def welcome():
 def login():
     return render_template('login.html')
 
+@app.route('/register', methods=['POST'])
+def register_user():
+    try:
+        data = request.get_json()
+        full_name = data['full_name']
+        birth_date = data['birth_date']
+        national_id = data['national_id']
+        phone = data['phone']
+        email = data['email']
+        username = data['username']
+        password = data['password']
+
+        success, message = create_user(full_name, birth_date, national_id, phone, email, username, password)
+        if success:
+            return jsonify({"message": message}), 200
+        else:
+            return jsonify({"message": message}), 400
+    except Exception as e:
+        return jsonify({"message": f"Error: {str(e)}"}), 500
+    
 @app.route('/register', methods=['GET'])
 def register():
     return render_template('register.html')
