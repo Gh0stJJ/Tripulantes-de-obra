@@ -1,13 +1,13 @@
 from flask import Flask, render_template, request, jsonify
 from flask_login import LoginManager
 from dotenv import load_dotenv
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash , check_password_hash
 from flask_socketio import SocketIO
 import os
 
 from extensions import db
 from models import User
-from database import create_user
+from database import create_user, find_user_by_username
 
 #Templates folder
 template_dir = os.path.abspath('../frontend')
@@ -70,6 +70,31 @@ def register():
 def problems():
     return render_template('problems.html')
 
+# Ruta para el inicio de sesión
+@app.route('/login', methods=['POST'])
+def login_user():
+    try:
+        data = request.get_json()
+        username = data.get('username')
+        password = data.get('password')
+
+        # Buscar al usuario en la base de datos
+        user = find_user_by_username(username)
+
+        if not user:
+            return jsonify({"message": "Usuario no encontrado"}), 404
+
+        # Verificar la contraseña
+        if not check_password_hash(user.password, password):
+            return jsonify({"message": "Contraseña incorrecta"}), 401
+
+        # Redirigir a problems.html
+        return jsonify({"message": "Inicio de sesión exitoso"}), 200
+    
+    
+
+    except Exception as e:
+        return jsonify({"message": f"Error: {str(e)}"}), 500
 
 if __name__ == '__main__':
     #csrf.init_app(app)

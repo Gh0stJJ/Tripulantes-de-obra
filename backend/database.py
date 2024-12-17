@@ -22,3 +22,7 @@ def create_user(full_name, birth_date, national_id, phone, email, username, pass
     db.session.add(new_user)
     db.session.commit()
     return True, "Usuario creado exitosamente"
+
+#busca al usuario en la base de datos
+def find_user_by_username(username):
+    return User.query.filter_by(username=username).first()

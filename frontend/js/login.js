@@ -6,19 +6,29 @@
 
 //Inicializacion de var, objetos, DOM
 
-var txtusername;
-var txtpassword;
-var btnLogin;
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-function domReady(){
-    txtusername = document.getElementById('txtusername');
-    txtpassword = document.getElementById('txtpassword');
-    btnLogin = document.getElementById('btnLogin');
-    btnLogin.addEventListener('click', function(){
-        if(txtusername.value === 'admin' && txtpassword.value === 'admin'){
-            window.location.href = 'welcome.html';
-        }else{
-            alert('Usuario o contraseña incorrectos');
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert('Inicio de sesión exitoso');
+            window.location.href = '/problems'; // Redirigir en caso de éxito
+        } else {
+            alert(`Error: ${result.message}`);
         }
-    });
-}
+    } catch (error) {
+        console.error('Error al iniciar sesión:', error);
+        alert('Ocurrió un error al conectar con el servidor.');
+    }
+});
