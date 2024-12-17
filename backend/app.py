@@ -8,7 +8,9 @@ import os
 
 from extensions import db
 from models import User
-from database import create_user, find_user_by_username
+from database import (
+    create_user, find_user_by_username, create_professional, verify_user_credentials
+)
 
 #Templates folder
 template_dir = os.path.abspath('../frontend')
@@ -123,13 +125,34 @@ def welcome_worker():
 def login_worker():
     return render_template('login_worker.html')
 
-@app.route('/register_worker')
-def register_worker():
-    return render_template('register_worker.html')
 
 @app.route('/professions_worker')
 def professions_worker():
     return render_template('professions_worker.html')
+
+@app.route('/register_worker', methods=['POST', 'GET'])
+def register_worker():
+    if request.method == 'POST':
+        try:
+            data = request.get_json()
+            success, message = create_professional(
+                data['full_name'],
+                data['birth_date'],
+                data['national_id'],
+                data['phone'],
+                data['email'],
+                data['username'],
+                data['password'],
+                data['profession']
+            )
+            if success:
+                return jsonify({"message": message}), 200
+            else:
+                return jsonify({"message": message}), 400
+        except Exception as e:
+            return jsonify({"message": f"Error: {str(e)}"}), 500
+    return render_template('register_worker.html')
+
 
 if __name__ == '__main__':
     #csrf.init_app(app)

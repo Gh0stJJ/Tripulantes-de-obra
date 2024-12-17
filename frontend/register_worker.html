@@ -1,62 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro - Tripulantes de Obra</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='CSS/reset.css') }}" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
-
     <link rel="stylesheet" href="{{ url_for('static', filename='CSS/register.css') }}" />
-  </head>
-  <body>
+</head>
+<body>
     <div class="register-container">
-      <!-- Encabezado -->
-      <h1 class="title">REGÍSTRATE</h1>
+        <h1 class="title">REGÍSTRATE COMO TRABAJADOR</h1>
 
-      <!-- Formulario -->
-      <form class="register-form" action="{{ url_for('professions_worker') }}" method="get">
-        <input type="text" placeholder="Nombre completo" required />
-        <input type="text" placeholder="Cédula" required />
-        <input type="tel" placeholder="Teléfono" required />
-
-        <select required>
-          <option value="" disabled selected>Selecciona tu profesión</option>
-          <option value="ingeniero">Ingeniero</option>
-          <option value="arquitecto">Arquitecto</option>
-          <option value="pintor">Pintor</option>
-          <option value="plomero">Plomero</option>
-          <option value="electricista">Electricista</option>
-          <option value="albañil">Albañil</option>
-        </select>
-        <input type="email" placeholder="Correo" required>
-        <input type="text" placeholder="Nombre de usuario" required>
-        <input type="password" placeholder="Contraseña" required />
-        <input type="password" placeholder="Repetir contraseña" required />
-
-        <button type="submit" class="btn-primary">Registrarse</button>
+        <form class="register-form" id="register-worker-form">
+          <input type="text" id="full_name" placeholder="Nombre completo" required />
+          <input type="date" id="birth_date" placeholder="Fecha de nacimiento" required />
+          <input type="text" id="national_id" placeholder="Cédula" required />
+          <input type="tel" id="phone" placeholder="Teléfono" required />
+          <select id="profession" required>
+              <option value="" disabled selected>Selecciona tu profesión</option>
+              <option value="ingeniero">Ingeniero</option>
+              <option value="arquitecto">Arquitecto</option>
+              <option value="pintor">Pintor</option>
+              <option value="plomero">Plomero</option>
+              <option value="electricista">Electricista</option>
+              <option value="albañil">Albañil</option>
+          </select>
+          <input type="email" id="email" placeholder="Correo" required />
+          <input type="text" id="username" placeholder="Nombre de usuario" required />
+          <input type="password" id="password" placeholder="Contraseña" required />
+          <input type="password" id="repeat_password" placeholder="Repetir contraseña" required />
+          <button type="submit" class="btn-primary">Registrarse</button>
       </form>
+      
 
-      <!-- Texto adicional -->
-      <p class="account-text">
-        ¿Ya tienes una cuenta?
-        <a href="{{ url_for('login_worker') }}" class="login-link">Inicia sesión</a>
-      </p>
-
-      <!-- Logo -->
-      <div class="logo-container">
-        <img
-          src="{{ url_for('static', filename='images/USUARIO (500 x 500 px).svg') }}"
-          alt="Logo Tripulantes de Obra"
-          class="logo"
-        />
-      </div>
+        <p class="account-text">
+            ¿Ya tienes una cuenta?
+            <a href="{{ url_for('login_worker') }}" class="login-link">Inicia sesión</a>
+        </p>
     </div>
-  </body>
+
+    <script src="{{ url_for('static', filename='JS/register_worker.js') }}"></script>
+</body>
 </html>
