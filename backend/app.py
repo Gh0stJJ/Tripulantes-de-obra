@@ -3,7 +3,7 @@ from flask_login import LoginManager
 from dotenv import load_dotenv
 from werkzeug.security import generate_password_hash , check_password_hash
 from flask_socketio import SocketIO
-from problems_data import PROBLEMS_DATA
+from problems_data import PROBLEMS_DATA, PROFESSIONALS_DATA
 import os
 
 from extensions import db
@@ -104,6 +104,14 @@ def login_user():
 
     except Exception as e:
         return jsonify({"message": f"Error: {str(e)}"}), 500
+    
+
+@app.route('/professionals/<profession>')
+def show_professionals(profession):
+    professionals = PROFESSIONALS_DATA.get(profession.lower())
+    if not professionals:
+        return "Profesión no encontrada", 404
+    return render_template("searcher.html", profession=profession.title(), professionals=professionals)
 
 if __name__ == '__main__':
     #csrf.init_app(app)

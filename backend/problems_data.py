@@ -25,4 +25,21 @@ PROBLEMS_DATA = {
     # Puedes agregar más problemas aquí
 }
 
+PROFESSIONALS_DATA = {
+    "arquitecto": [
+        {"name": "Arq. Sofía Valdiviezo", "description": "Especializada en rediseño de espacios y estructuras."},
+        {"name": "Arq. Dogo Zambrano", "description": "Amplia experiencia en proyectos residenciales y comerciales."}
+    ],
+    "plomero": [
+        {"name": "Plom. Juan García", "description": "Reparaciones rápidas en fugas y conexiones."},
+        {"name": "Plom. Luis Rivas", "description": "Instalación de sistemas de agua potable y desagüe."}
+    ],
+    "albanil": [
+        {"name": "Albañil Pedro López", "description": "Restauración de paredes y estructuras afectadas."},
+        {"name": "Albañil Marco Salas", "description": "Trabajos de albañilería en pisos y techos."}
+    ],
+    "yesero": [
+        {"name": "Yesero Carlos Ruiz", "description": "Acabados finos y reparación de superficies."}
+    ]
+}
 
