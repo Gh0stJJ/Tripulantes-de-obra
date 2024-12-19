@@ -83,3 +83,22 @@ def is_profile_incomplete(user_id):
     # Verificar si alguno de los campos clave está vacío
     required_fields = [profile.location, profile.description, profile.phone]
     return any(field is None or field.strip() == "" for field in required_fields)
+
+def update_professional_profile(user_id, description, location, phone, instagram, facebook, link):
+    """
+    Actualiza el perfil profesional de un usuario.
+    """
+    profile = ProfessionalProfile.query.filter_by(user_id=user_id).first()
+    if not profile:
+        return False, "Perfil profesional no encontrado"
+
+    # Actualizar campos
+    profile.description = description or profile.description
+    profile.location = location or profile.location
+    profile.phone = phone or profile.phone
+    profile.instagram_link = instagram or profile.instagram_link
+    profile.facebook_link = facebook or profile.facebook_link
+    profile.extra_link = link or profile.extra_link
+
+    db.session.commit()
+    return True, "Perfil actualizado exitosamente"

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user, login_user
 from dotenv import load_dotenv
 from werkzeug.security import generate_password_hash , check_password_hash
 from flask_socketio import SocketIO
@@ -8,9 +8,7 @@ import os
 
 from extensions import db
 from models import User
-from database import (
-    create_user, find_user_by_username, create_professional, verify_user_credentials, is_profile_incomplete
-)
+from database import *
 
 #Templates folder
 template_dir = os.path.abspath('../frontend')
@@ -20,7 +18,7 @@ app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
 load_dotenv()
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['UPLOAD_FOLDER'] = '../Frontend/static/uploads'
-# app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 #csrf = CSRFProtect()
 db.init_app(app)
 login_manager = LoginManager(app)
@@ -83,7 +81,7 @@ def problem_detail(problem_id):
 
 # Ruta para el inicio de sesión
 @app.route('/login', methods=['POST'])
-def login_user():
+def handle_login():
     try:
         data = request.get_json()
         username = data.get('username')
@@ -170,6 +168,9 @@ def login_worker():
             if user.role != 'professional':
                 return jsonify({"message": "No tienes permisos para acceder aquí"}), 403
 
+            # Autenticar al usuario con Flask-Login
+            login_user(user)
+
             # Comprobar si el perfil está completo
             if is_profile_incomplete(user.id):
                 return jsonify({"redirect": "/profession_form"}), 200
@@ -179,9 +180,39 @@ def login_worker():
             return jsonify({"message": f"Error: {str(e)}"}), 500
     return render_template('login_worker.html')
 
-@app.route('/profession_form', methods=['GET'])
+
+@app.route('/profession_form', methods=['GET', 'POST'])
 def profession_form():
-    return render_template('profession_form.html')
+    if request.method == 'GET':
+        # Comprobar si el usuario está autenticado
+        if not current_user.is_authenticated:
+            return jsonify({"message": "Usuario no autenticado"}), 401
+
+        # Pasar el nombre de usuario al template
+        return render_template('profession_form.html', username=current_user.username)
+
+    if request.method == 'POST':
+        try:
+            # Obtener datos enviados por el cliente
+            data = request.get_json()
+            description = data.get("description")
+            location = data.get("location")
+            phone = data.get("phone")
+            instagram = data.get("instagram")
+            facebook = data.get("facebook")
+            link = data.get("link")
+
+            # Actualizar el perfil profesional
+            success, message = update_professional_profile(
+                current_user.id, description, location, phone, instagram, facebook, link
+            )
+            if success:
+                return jsonify({"message": message}), 200
+            else:
+                return jsonify({"message": message}), 400
+
+        except Exception as e:
+            return jsonify({"message": f"Error: {str(e)}"}), 500
 
 if __name__ == '__main__':
     #csrf.init_app(app)
