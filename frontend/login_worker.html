@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicia Sesión - Tripulantes de Obra</title>
-    <link rel="stylesheet" href="CSS/reset.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/reset.css') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="CSS/login.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/login.css') }}">
 </head>
 <body>
     <div class="login-container">
@@ -18,19 +18,21 @@
         <h1 class="title">INICIA SESIÓN</h1>
 
         <!-- Formulario -->
-        <form class="login-form" action="professions_worker.html" method="get">
-            <input type="text" placeholder="Nombre de usuario" required>
-            <input type="password" placeholder="Contraseña" required>
+        <form class="login-form" id="login-worker-form">
+            <input type="text" id="username" placeholder="Nombre de usuario" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
             <button type="submit" class="btn-primary">Iniciar Sesión</button>
         </form>
+        
 
         <!-- Texto adicional -->
-        <p class="account-text">¿NO tienes una cuenta? <a href="register.html" class="register-link">Regístrate</a></p>
+        <p class="account-text">¿NO tienes una cuenta? <a href="{{ url_for('register') }}" class="register-link">Regístrate</a></p>
 
         <!-- Logo -->
         <div class="logo-container">
-            <img src="images/USUARIO (500 x 500 px).svg" alt="Logo Tripulantes de Obra" class="logo">
+            <img src="{{ url_for('static', filename='images/USUARIO (500 x 500 px).svg') }}" alt="Logo Tripulantes de Obra" class="logo">
         </div>
     </div>
+    <script src="{{ url_for('static', filename='JS/login_worker.js') }}"></script>
 </body>
 </html>

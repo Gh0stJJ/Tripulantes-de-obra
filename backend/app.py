@@ -121,11 +121,6 @@ def show_professionals(profession):
 def welcome_worker():
     return render_template('welcome_worker.html')
 
-@app.route('/login_worker')
-def login_worker():
-    return render_template('login_worker.html')
-
-
 @app.route('/professions_worker')
 def professions_worker():
     return render_template('professions_worker.html')
@@ -153,6 +148,35 @@ def register_worker():
             return jsonify({"message": f"Error: {str(e)}"}), 500
     return render_template('register_worker.html')
 
+@app.route('/login_worker', methods=['POST', 'GET'])
+def login_worker():
+    if request.method == 'POST':
+        try:
+            data = request.get_json()
+            username = data.get('username')
+            password = data.get('password')
+
+            # Buscar al usuario en la base de datos
+            user = find_user_by_username(username)
+
+            if not user:
+                return jsonify({"message": "Usuario no encontrado"}), 404
+
+            # Verificar la contraseña
+            if not check_password_hash(user.password, password):
+                return jsonify({"message": "Contraseña incorrecta"}), 401
+
+            # Verificar que el usuario sea un profesional
+            if user.role != 'professional':
+                return jsonify({"message": "No tienes permisos para acceder aquí"}), 403
+
+            # Respuesta exitosa
+            return jsonify({"message": "Inicio de sesión exitoso"}), 200
+
+        except Exception as e:
+            return jsonify({"message": f"Error: {str(e)}"}), 500
+    # GET request
+    return render_template('login_worker.html')
 
 if __name__ == '__main__':
     #csrf.init_app(app)
