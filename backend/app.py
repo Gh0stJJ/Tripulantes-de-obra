@@ -9,7 +9,7 @@ import os
 from extensions import db
 from models import User
 from database import (
-    create_user, find_user_by_username, create_professional, verify_user_credentials
+    create_user, find_user_by_username, create_professional, verify_user_credentials, is_profile_incomplete
 )
 
 #Templates folder
@@ -170,12 +170,13 @@ def login_worker():
             if user.role != 'professional':
                 return jsonify({"message": "No tienes permisos para acceder aquí"}), 403
 
-            # Respuesta exitosa
-            return jsonify({"message": "Inicio de sesión exitoso"}), 200
-
+            # Comprobar si el perfil está completo
+            if is_profile_incomplete(user.id):
+                return jsonify({"redirect": "/profession_form"}), 200
+            else:
+                return jsonify({"redirect": "/professions_worker"}), 200
         except Exception as e:
             return jsonify({"message": f"Error: {str(e)}"}), 500
-    # GET request
     return render_template('login_worker.html')
 
 @app.route('/profession_form', methods=['GET'])

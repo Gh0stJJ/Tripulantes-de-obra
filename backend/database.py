@@ -70,3 +70,16 @@ def verify_user_credentials(username, password):
     if not check_password_hash(user.password, password):
         return False, "Contraseña incorrecta"
     return True, "Inicio de sesión exitoso"
+
+
+def is_profile_incomplete(user_id):
+    """
+    Verifica si el perfil profesional de un usuario tiene campos importantes vacíos.
+    """
+    profile = ProfessionalProfile.query.filter_by(user_id=user_id).first()
+    if not profile:
+        return True  # No tiene perfil profesional, se considera incompleto
+
+    # Verificar si alguno de los campos clave está vacío
+    required_fields = [profile.location, profile.description, profile.phone]
+    return any(field is None or field.strip() == "" for field in required_fields)

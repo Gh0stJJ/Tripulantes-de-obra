@@ -14,8 +14,7 @@ document.getElementById("login-worker-form").addEventListener("submit", async (e
         const result = await response.json();
 
         if (response.ok) {
-            alert("Inicio de sesión exitoso");
-            window.location.href = "/profession_form"; // Redirigir al área de profesionales
+            window.location.href = result.redirect; // Redirigir según lo que devuelve el backend
         } else {
             alert(`Error: ${result.message}`);
         }
