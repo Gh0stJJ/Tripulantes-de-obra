@@ -92,6 +92,9 @@ def handle_login():
 
         if not user:
             return jsonify({"message": "Usuario no encontrado"}), 404
+        
+        #Autenticar al usuario con Flask-Login
+        login_user(user)
 
         # Verificar la contraseña
         if not check_password_hash(user.password, password):
