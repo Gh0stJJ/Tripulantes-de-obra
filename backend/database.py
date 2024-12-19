@@ -1,6 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import User, Profession, ProfessionalProfile
 from extensions import db
+from sqlalchemy.orm import joinedload
 
 # Crear un usuario con rol especificado
 def create_user(full_name,birth_date, national_id, phone, email, username, password, role='client'):
@@ -109,8 +110,40 @@ def get_professions():
     return Profession.query.all()
 
 # Consultar profesionales por profesión
+from sqlalchemy.orm import joinedload
+
 def get_professionals_by_profession(profession_name):
+    """
+    Consulta los profesionales relacionados con una profesión específica.
+    
+    :param profession_name: Nombre de la profesión (str)
+    :return: Lista de diccionarios con los datos de los profesionales
+    """
+    # Buscar la profesión por nombre
     profession = Profession.query.filter_by(name=profession_name.capitalize()).first()
     if not profession:
-        return None
-    return profession.profession
+        return None  # Profesión no encontrada
+
+    # Cargar los perfiles profesionales relacionados
+    professionals = (
+        ProfessionalProfile.query
+        .filter_by(profession_id=profession.id)
+        .options(joinedload(ProfessionalProfile.user))  # Cargar relación con User
+        .all()
+    )
+
+    # Formatear los datos de los profesionales en una lista de diccionarios
+    professional_data = [
+        {
+            "name": profile.user.full_name,
+            "description": profile.description,
+            "location": profile.location,
+            "phone": profile.phone,
+            "instagram_link": profile.instagram_link,
+            "facebook_link": profile.facebook_link,
+            "extra_link": profile.extra_link
+        }
+        for profile in professionals
+    ]
+
+    return professional_data

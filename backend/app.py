@@ -3,7 +3,7 @@ from flask_login import LoginManager, current_user, login_user
 from dotenv import load_dotenv
 from werkzeug.security import generate_password_hash , check_password_hash
 from flask_socketio import SocketIO
-from problems_data import PROBLEMS_DATA, PROFESSIONALS_DATA
+from problems_data import PROBLEMS_DATA
 import os
 
 from extensions import db
@@ -111,7 +111,7 @@ def handle_login():
 
 @app.route('/professionals/<profession>')
 def show_professionals(profession):
-    professionals = PROFESSIONALS_DATA.get(profession.lower())
+    professionals = get_professionals_by_profession(profession)
     if not professionals:
         return "Profesión no encontrada", 404
     return render_template("searcher.html", profession=profession.title(), professionals=professionals)
