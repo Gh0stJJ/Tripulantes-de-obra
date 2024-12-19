@@ -178,6 +178,10 @@ def login_worker():
     # GET request
     return render_template('login_worker.html')
 
+@app.route('/profession_form', methods=['GET'])
+def profession_form():
+    return render_template('profession_form.html')
+
 if __name__ == '__main__':
     #csrf.init_app(app)
     #app.run(debug=True,host='0.0.0.0', port=5000)

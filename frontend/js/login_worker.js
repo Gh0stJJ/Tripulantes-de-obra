@@ -15,7 +15,7 @@ document.getElementById("login-worker-form").addEventListener("submit", async (e
 
         if (response.ok) {
             alert("Inicio de sesión exitoso");
-            window.location.href = "/professions_worker"; // Redirigir al área de profesionales
+            window.location.href = "/profession_form"; // Redirigir al área de profesionales
         } else {
             alert(`Error: ${result.message}`);
         }

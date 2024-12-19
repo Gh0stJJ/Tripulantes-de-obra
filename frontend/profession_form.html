@@ -6,50 +6,49 @@
     <title>Perfil - Tripulantes de Obra</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="CSS/profession_form.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/profession_form.css') }}">
 </head>
 <body>
     <div class="container profile-container">
         <!-- Username -->
-        <h1 class="username">@username</h1>
+        <h1 class="username">@{{ username }}</h1>
 
         <!-- Formulario -->
-        <form>
+        <form method="POST" action="{{ url_for('profession_form') }}">
             <div class="mb-3">
                 <label for="description" class="form-label">Tu descripción:</label>
-                <input type="text" class="form-control" id="description" placeholder="Escribe una breve descripción">
+                <input type="text" class="form-control" id="description" name="description" placeholder="Escribe una breve descripción">
             </div>
 
             <div class="mb-3">
                 <label for="location" class="form-label">Ubicación:</label>
-                <input type="text" class="form-control" id="location" placeholder="Ingresa tu ubicación">
+                <input type="text" class="form-control" id="location" name="location" placeholder="Ingresa tu ubicación">
             </div>
 
             <div class="mb-3">
                 <label for="phone" class="form-label">Teléfono:</label>
-                <input type="text" class="form-control" id="phone" placeholder="Ingresa tu número de teléfono">
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Ingresa tu número de teléfono">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Redes sociales:</label>
                 <div class="d-flex gap-2">
-                    <input type="text" class="form-control" placeholder="Instagram">
-                    <input type="text" class="form-control" placeholder="Facebook">
+                    <input type="text" class="form-control" name="instagram" placeholder="Instagram">
+                    <input type="text" class="form-control" name="facebook" placeholder="Facebook">
                 </div>
             </div>
 
             <div class="mb-3">
                 <label for="link" class="form-label">Link adicional:</label>
-                <input type="url" class="form-control" id="link" placeholder="Ingresa un enlace adicional">
+                <input type="url" class="form-control" id="link" name="link" placeholder="Ingresa un enlace adicional">
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">¿Necesitas algún profesional?</button>
+            <button type="submit" class="btn btn-primary w-100">Aceptar</button>
         </form>
 
         <!-- Información adicional -->
-         <!-- Texto adicional -->
-         <div class="info-section">
-            <img src="images/home_icon.png" alt="Icono" class="icon" height="75">
+        <div class="info-section">
+            <img src="{{ url_for('static', filename='images/home_icon.png') }}" alt="Icono" class="icon" height="75">
             <p class="info-text">
                 Entra aquí para conocer más acerca de los problemas urbanos contemporáneos
             </p>
