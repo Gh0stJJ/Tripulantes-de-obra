@@ -122,10 +122,6 @@ def show_professionals(profession):
 def welcome_worker():
     return render_template('welcome_worker.html')
 
-@app.route('/professions_worker')
-def professions_worker():
-    return render_template('professions_worker.html')
-
 @app.route('/register_worker', methods=['POST', 'GET'])
 def register_worker():
     if request.method == 'POST':
@@ -216,6 +212,16 @@ def profession_form():
 
         except Exception as e:
             return jsonify({"message": f"Error: {str(e)}"}), 500
+        
+
+@app.route('/professions_worker', methods=['GET'])
+def professions_worker():
+    # Consultar las profesiones desde la base de datos
+    professions = get_professions()
+
+    # Pasar las profesiones al template
+    return render_template('professions_worker.html', professions=professions)
+
 
 if __name__ == '__main__':
     #csrf.init_app(app)

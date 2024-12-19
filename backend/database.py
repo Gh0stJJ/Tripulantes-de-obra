@@ -102,3 +102,7 @@ def update_professional_profile(user_id, description, location, phone, instagram
 
     db.session.commit()
     return True, "Perfil actualizado exitosamente"
+
+# Consultar las profesiones desde la base de datos
+def get_professions():
+    return Profession.query.all()

@@ -4,13 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesión - Tripulantes de Obra</title>
-    <link rel="stylesheet" href="CSS/reset.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="CSS/professions_worker.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/professions_worker.css') }}">
 </head>
 <body>
     <div class="professions-container">
@@ -19,22 +14,14 @@
 
         <!-- Botones de profesiones -->
         <div class="profession-list">
-            <button class="profession-btn" onclick="location.href='searcher.html'">ARQUITECTO</button>
-            <button class="profession-btn" onclick="location.href='searcher.html'">ING. CIVIL</button>
-            <button class="profession-btn" onclick="location.href='searcher.html'">ING. ELÉCTRICO</button>
-            <button class="profession-btn" onclick="location.href='searcher.html'">ING. SANITARIO</button>
-            <button class="profession-btn" onclick="location.href='searcher.html'">ING. GEOTÉCNICO</button>
-            <button class="profession-btn" onclick="location.href='searcher.html'">TOPÓGRAFO</button>
-            <button class="profession-btn" onclick="location.href='searcher.html'">TÉCNICOS</button>
-            <button class="profession-btn" onclick="location.href='searcher.html'">ESPECIALISTAS</button>
-            <button class="profession-btn" onclick="location.href='searcher.html'">ALBAÑIL</button>
-            <button class="profession-btn" onclick="location.href='searcher.html'">CARPINTERO</button>
-            <button class="profession-btn" onclick="location.href='searcher.html'">ELECTRICISTA</button>
-            <button class="profession-btn" onclick="location.href='searcher.html'">PLOMERO</button>
-            <button class="profession-btn" onclick="location.href='searcher.html'">YESERO</button>
-            <button class="profession-btn" onclick="location.href='searcher.html'">SOLDADOR</button>
-            <button class="profession-btn wide-btn" onclick="location.href='searcher.html'">ESPECIALISTA EN VIDRIOS</button>
+            {% for profession in professions %}
+                <button class="profession-btn" data-profession="{{ profession.name | lower }}">
+                    {{ profession.name }}
+                </button>
+            {% endfor %}
         </div>
     </div>
+
+    <script src="{{ url_for('static', filename='JS/professions_worker.js') }}"></script>
 </body>
 </html>
