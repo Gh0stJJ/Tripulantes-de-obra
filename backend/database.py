@@ -3,13 +3,14 @@ from models import User, Profession, ProfessionalProfile
 from extensions import db
 
 # Crear un usuario con rol especificado
-def create_user(full_name, national_id, phone, email, username, password, role='client'):
+def create_user(full_name,birth_date, national_id, phone, email, username, password, role='client'):
     if User.query.filter_by(email=email).first() or User.query.filter_by(username=username).first():
         return False, "El usuario o correo ya existe"
 
     hashed_password = generate_password_hash(password)
     new_user = User(
         full_name=full_name,
+        birth_date=birth_date,
         national_id=national_id,
         phone=phone,
         email=email,
@@ -106,3 +107,10 @@ def update_professional_profile(user_id, description, location, phone, instagram
 # Consultar las profesiones desde la base de datos
 def get_professions():
     return Profession.query.all()
+
+# Consultar profesionales por profesión
+def get_professionals_by_profession(profession_name):
+    profession = Profession.query.filter_by(name=profession_name.capitalize()).first()
+    if not profession:
+        return None
+    return profession.profession
