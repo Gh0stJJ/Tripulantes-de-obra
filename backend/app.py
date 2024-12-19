@@ -222,6 +222,18 @@ def professions_worker():
     # Pasar las profesiones al template
     return render_template('professions_worker.html', professions=professions)
 
+@app.route('/professionals/<profession>/<int:professional_id>', methods=['GET'])
+def professional_detail(profession, professional_id):
+    # Consultar la información del profesional por ID
+    professional_profile = get_professional_by_id(professional_id)
+    
+    if not professional_profile:
+        return "Profesional no encontrado", 404
+
+    # Renderizar la plantilla con los datos del profesional
+    return render_template("profession_detail.html", professional=professional_profile)
+
+
 
 if __name__ == '__main__':
     #csrf.init_app(app)

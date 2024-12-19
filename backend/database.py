@@ -135,7 +135,8 @@ def get_professionals_by_profession(profession_name):
     # Formatear los datos de los profesionales en una lista de diccionarios
     professional_data = [
         {
-            "name": profile.user.full_name,
+            'id': profile.id,
+            "full_name": profile.user.full_name,
             "description": profile.description,
             "location": profile.location,
             "phone": profile.phone,
@@ -145,5 +146,31 @@ def get_professionals_by_profession(profession_name):
         }
         for profile in professionals
     ]
+
+    return professional_data
+
+# Consultar la información del profesional por ID
+def get_professional_by_id(professional_id):
+    """
+    Consulta la información de un profesional por ID.
+    
+    :param professional_id: ID del profesional (int)
+    :return: Diccionario con los datos del profesional
+    """
+    # Buscar el perfil profesional por ID
+    professional_profile = ProfessionalProfile.query.get(professional_id)
+    if not professional_profile:
+        return None  # Profesional no encontrado
+
+    # Construir el diccionario con los datos del profesional
+    professional_data = {
+        "full_name": professional_profile.user.full_name,
+        "description": professional_profile.description,
+        "location": professional_profile.location,
+        "phone": professional_profile.phone,
+        "instagram_link": professional_profile.instagram_link,
+        "facebook_link": professional_profile.facebook_link,
+        "extra_link": professional_profile.extra_link
+    }
 
     return professional_data

@@ -23,13 +23,14 @@
         <!-- Lista de profesionales -->
         <div class="professional-list">
             {% for professional in professionals %}
-                <div class="professional-card">
-                    <h2 class="professional-name">{{ professional.name }}</h2>
+                <div class="professional-card" data-id="{{ professional.id }}" data-profession="{{ profession | lower }}">
+                    <h2 class="professional-name">{{ professional.full_name }}</h2>
                     <p class="professional-description">{{ professional.description }}</p>
                 </div>
-                <hr class="divider">
             {% endfor %}
         </div>
+        
     </div>
+    <script src="{{ url_for('static', filename='JS/searcher.js') }}"></script>
 </body>
 </html>
